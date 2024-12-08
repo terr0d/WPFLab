@@ -1,0 +1,133 @@
+﻿<Page x:Class="AdaptationManagement.AnalysisPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Анализ адаптационных мероприятий">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель фильтров -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" 
+                          Margin="0,0,20,0">
+                    <TextBlock Text="Период:" 
+                             Margin="0,0,0,5"/>
+                    <ComboBox x:Name="PeriodComboBox" 
+                             Width="200" 
+                             Height="30"
+                             SelectionChanged="Filter_SelectionChanged">
+                        <ComboBoxItem Content="1 квартал"/>
+                        <ComboBoxItem Content="2 квартал"/>
+                        <ComboBoxItem Content="3 квартал"/>
+                        <ComboBoxItem Content="4 квартал"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" 
+                          Margin="0,0,20,0">
+                    <TextBlock Text="Отдел:" 
+                             Margin="0,0,0,5"/>
+                    <ComboBox x:Name="DepartmentFilterComboBox" 
+                             Width="200"
+                             Height="30"
+                             SelectionChanged="Filter_SelectionChanged"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="Должность:" 
+                             Margin="0,0,0,5"/>
+                    <ComboBox x:Name="PositionFilterComboBox" 
+                             Width="200"
+                             Height="30"
+                             SelectionChanged="Filter_SelectionChanged"/>
+                </StackPanel>
+            </Grid>
+
+            <Button Grid.Row="1"
+                    Content="Сбросить фильтры" 
+                    Height="30"
+                    Padding="15,0"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Left"
+                    Click="ResetFilters_Click"/>
+        </Grid>
+
+        <!-- Область отчетов -->
+        <TabControl Grid.Row="1">
+            <TabItem Header="Таблица">
+                <DataGrid x:Name="ReportGrid" 
+                         AutoGenerateColumns="False" 
+                         IsReadOnly="True"
+                         Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Отдел" 
+                                          Binding="{Binding Department}" 
+                                          Width="*"/>
+                        <DataGridTextColumn Header="Должность" 
+                                          Binding="{Binding Position}" 
+                                          Width="100"/>
+                        <DataGridTextColumn Header="Квартал" 
+                                          Binding="{Binding Quarter}" 
+                                          Width="100"/>
+                        <DataGridTextColumn Header="Всего программ" 
+                                          Binding="{Binding TotalPrograms}" 
+                                          Width="120"/>
+                        <DataGridTextColumn Header="Завершено" 
+                                          Binding="{Binding CompletedPrograms}" 
+                                          Width="100"/>
+                        <DataGridTextColumn Header="Ошибок" 
+                                          Binding="{Binding ErrorsCount}" 
+                                          Width="60"/>
+                        <DataGridTextColumn Header="% выполнения" 
+                                          Binding="{Binding CompletionPercentage, StringFormat={}{0:F1}%}" 
+                                          Width="120"/>
+                        <DataGridTextColumn Header="Трудоустроено" 
+                                          Binding="{Binding EmployedAfterProgram}" 
+                                          Width="120"/>
+                        <DataGridTextColumn Header="% трудоустройства" 
+                                          Binding="{Binding EmploymentRate, StringFormat={}{0:F1}%}" 
+                                          Width="140"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Диаграмма" 
+                    Loaded="DiagramTab_Loaded">
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <ComboBox x:Name="ChartTypeComboBox" 
+                             Width="200"
+                             Height="30"
+                             Margin="0,0,0,10"
+                             HorizontalAlignment="Left"
+                             SelectionChanged="ChartType_SelectionChanged">
+                        <ComboBoxItem Content="Процент выполнения"/>
+                        <ComboBoxItem Content="Количество ошибок"/>
+                        <ComboBoxItem Content="Процент трудоустройства"/>
+                    </ComboBox>
+
+                    <Canvas x:Name="ChartCanvas" 
+                            Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>

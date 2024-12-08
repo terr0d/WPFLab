@@ -1,0 +1,147 @@
+﻿<Window x:Class="AdaptationManagement.NewModuleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Создание нового модуля" 
+        Height="600" 
+        Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Название модуля -->
+        <Grid Grid.Row="0" 
+              Margin="0,0,0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" 
+                      Text="Название модуля:" 
+                      Margin="0,0,0,5"/>
+            <TextBox Grid.Row="1" 
+                     x:Name="ModuleNameTextBox" 
+                     Height="30"/>
+        </Grid>
+
+        <!-- Должность -->
+        <Grid Grid.Row="1" 
+              Margin="0,0,0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" 
+                      Text="Должность:" 
+                      Margin="0,0,0,5"/>
+            <ComboBox Grid.Row="1" 
+                     x:Name="PositionComboBox" 
+                     Height="30"/>
+        </Grid>
+
+        <!-- Разработчики -->
+        <Grid Grid.Row="2" 
+              Margin="0,0,0,15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" 
+                      Text="Разработчики:" 
+                      Margin="0,0,0,5"/>
+            <ListBox Grid.Row="1" 
+                    x:Name="DevelopersListBox" 
+                    Height="100" 
+                    Margin="0,0,0,10"/>
+            <Button Grid.Row="2" 
+                    Content="Добавить разработчика" 
+                    Height="30"
+                    Padding="15,0"
+                    HorizontalAlignment="Left"
+                    Click="AddDeveloper_Click"/>
+        </Grid>
+
+        <!-- Согласующие и сроки -->
+        <Grid Grid.Row="3" 
+              Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Согласующие -->
+            <Grid Grid.Column="0" 
+                  Margin="0,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                          Text="Согласующие:" 
+                          Margin="0,0,0,5"/>
+                <ListBox Grid.Row="1" 
+                        x:Name="ApproversListBox" 
+                        Height="100" 
+                        Margin="0,0,0,10"/>
+                <Button Grid.Row="2" 
+                        Content="Добавить согласующего" 
+                        Height="30"
+                        Padding="15,0"
+                        HorizontalAlignment="Left"
+                        Click="AddApprover_Click"/>
+            </Grid>
+
+            <!-- Главный согласующий и дата -->
+            <Grid Grid.Column="1" 
+                  Margin="10,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" 
+                          Text="Главный согласующий:" 
+                          Margin="0,0,0,5"/>
+                <ComboBox Grid.Row="1" 
+                         x:Name="MainApproverComboBox" 
+                         Height="30"/>
+                <TextBlock Grid.Row="2" 
+                          Text="Срок реализации:" 
+                          Margin="0,15,0,5"/>
+                <DatePicker Grid.Row="3" 
+                           x:Name="DeadlineDatePicker" 
+                           Height="30"/>
+            </Grid>
+        </Grid>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="6" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button Content="Сохранить" 
+                    Width="120" 
+                    Height="30"
+                    Margin="0,0,10,0" 
+                    Click="Save_Click"/>
+            <Button Content="Отмена" 
+                    Width="120" 
+                    Height="30"
+                    Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

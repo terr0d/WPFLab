@@ -1,0 +1,197 @@
+﻿<Page x:Class="AdaptationManagement.ModulesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Адаптационные модули">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель фильтров -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                    <TextBlock Text="Фильтр по должности:" Margin="0,0,0,5"/>
+                    <ComboBox x:Name="PositionFilter" 
+                            Width="200" 
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            SelectionChanged="PositionFilter_SelectionChanged"/>
+                </StackPanel>
+
+                <Button Grid.Column="1"
+                        Content="Сбросить фильтр" 
+                        Height="30"
+                        Padding="15,0"
+                        VerticalAlignment="Bottom"
+                        Click="ResetFilter_Click"/>
+            </Grid>
+
+            <Button Grid.Row="1"
+                    Content="Создать новый модуль" 
+                    Width="200"
+                    Height="30"
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Left"
+                    Click="CreateNewModule_Click"/>
+        </Grid>
+
+        <!-- Список модулей -->
+        <TabControl Grid.Row="1">
+            <TabItem Header="Новые">
+                <DataGrid x:Name="NewModulesGrid" 
+                         AutoGenerateColumns="False" 
+                         Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название" 
+                                          Binding="{Binding Name}" 
+                                          Width="*"/>
+                        <DataGridTextColumn Header="Должность" 
+                                          Binding="{Binding Position}" 
+                                          Width="150"/>
+                        <DataGridTemplateColumn Header="Разработчики" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Developers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" 
+                                                         Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Согласующие" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Approvers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" 
+                                                         Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Срок реализации" 
+                                          Binding="{Binding DeadlineDate, StringFormat=dd.MM.yyyy}" 
+                                          Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="Черновики">
+                <DataGrid x:Name="DraftModulesGrid" 
+                         AutoGenerateColumns="False" 
+                         Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название" 
+                                          Binding="{Binding Name}" 
+                                          Width="*"/>
+                        <DataGridTextColumn Header="Должность" 
+                                          Binding="{Binding Position}" 
+                                          Width="150"/>
+                        <DataGridTemplateColumn Header="Разработчики" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Developers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" 
+                                                         Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Согласующие" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Approvers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" 
+                                                         Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Срок реализации" 
+                                          Binding="{Binding DeadlineDate, StringFormat=dd.MM.yyyy}" 
+                                          Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <TabItem Header="В работе">
+                <DataGrid x:Name="ActiveModulesGrid" 
+                         AutoGenerateColumns="False" 
+                         Margin="5">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Название" 
+                                          Binding="{Binding Name}" 
+                                          Width="*"/>
+                        <DataGridTextColumn Header="Должность" 
+                                          Binding="{Binding Position}" 
+                                          Width="150"/>
+                        <DataGridTemplateColumn Header="Разработчики" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Developers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" 
+                                                         Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Согласующие" 
+                                              Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ItemsControl ItemsSource="{Binding Approvers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding}" 
+                                                         Margin="5"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="Срок реализации" 
+                                          Binding="{Binding DeadlineDate, StringFormat=dd.MM.yyyy}" 
+                                          Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>
